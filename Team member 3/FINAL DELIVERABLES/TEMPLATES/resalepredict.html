@@ -1,0 +1,539 @@
+<html>
+	<head>
+	<title>Resale Value Prediction</title>
+	<style>
+		.header {	
+			top:0px;	
+			margin:0px;
+			left: 0px;
+			right: 0px;
+			position: fixed;
+			background: #304040;
+			color: white;
+			overflow: hidden;
+			padding-bottom: 30px;
+			font-size: 2.25vw;
+			width: 100%;
+			padding-left:0px;
+			text-align: center;
+			padding-top:20px;
+		}
+		.second{
+			top:80px;
+			bottom:0px;
+			margin:0px;
+			left: 0px;
+			right: 0px;
+			position: fixed;
+			padding: 0px;
+			width: 100%;
+			background-color:#E4EEFF; 
+			overflow: scroll;
+		}
+		.inside{
+			top:80px;
+			bottom:0px;
+			margin:0px;
+			left: 55%;
+			right: 0%;
+			position: fixed;
+			padding-left: 40px;
+			padding-top:8%;
+			padding-right:40px;
+			background-color:#F2D19A;
+			font-family:Georgia, serif;
+			color:black;
+			font-size:20px;
+			text-align:justify;
+			
+		}
+		.myButton{
+			  border: none;
+			  text-align: center;
+			  cursor: pointer;
+			  text-transform: uppercase;
+			  outline: none;
+			  overflow: hidden;
+			  color: #fff;
+			  font-weight: 700;
+			  font-size: 12px;
+			  background-color: #304040;
+			  padding: 10px 15px;
+			  margin: 0 auto;
+			  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+			  margin-left:17%;
+		}
+	input { 
+	width:100%; 
+	margin-bottom: 10px; 
+	background: white;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: black;
+	text-shadow: white;
+	border: 10px #304040;
+	border-radius: 40px;
+	box-shadow: white;
+}
+	select { 
+	width:100%; 
+	margin-bottom: 10px; 
+	background: white;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #6c493a;
+	text-shadow: white;
+	border: #6c493a;
+	border-radius: 40px;
+	box-shadow: white;
+}
+::placeholder {
+  color: black;
+  opacity: 1; 
+}
+.radion {
+	border:2px solid black;
+	border-color:black;
+	height:17px;
+	width:17px;
+}
+
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+	</style>
+	</head>
+	<body style="font-family:Georgia, serif; ">
+		<div class="header">Get the Accurate Resale Value of your Car!!</div>
+		<div class="second">
+		<p align = 'center'style="font-size:25px">Please fill the following details of your car:</p>
+			<form action="{{ url_for('y_predict')}}"method="post">
+				<table align='center' style='padding:15px; border-spacing: 15px; font-size:20 px'>
+
+	<tr>
+    <td><label for="regyear"><b>Registration Year</b></label></td>
+    <td><input type="text" placeholder="Enter registration year" name="regyear" id="rcorners1" required></td>
+	</tr>
+	
+	<tr>
+    <td><label for="regmonth" ><b>Registration Month</b></label></td>
+    <td><select name="regmonth" required>
+		<option value =	"0"	>	January	</option>
+		<option value =	"1"	>	February	</option>
+		<option value =	"2"	>	March	</option>
+		<option value =	"3"	>	April	</option>
+		<option value =	"4"	>	May	</option>
+		<option value =	"5"	>	June	</option>
+		<option value =	"6"	>	July	</option>
+		<option value =	"7"	>	August	</option>
+		<option value =	"8"	>	September	</option>
+		<option value =	"9"	>	October	</option>
+		<option value =	"10"	>	November	</option>
+		<option value =	"11"	>	December	</option>
+		</select>
+		</td>
+	</tr>
+	
+	<tr>
+    <td><label for="powerps"><b>Power of car in PS</b></label></td>
+    <td><input type="text" placeholder="Enter power of car" name="powerps" id="rcorners1" required></td>
+	</tr>
+	
+	<tr>
+    <td><label for="kms"><b>Kilometers the car has driven</b></label></td>
+    <td><input type="text" placeholder="Enter no. of kms" name="kms" id="rcorners1" required></td>
+	</tr>
+	
+	<tr>
+    <td><label for="gearbox"><b>Gear Box Type</b></label></td>
+    <td style = "vertical-align:middle"><input type="radio" class="radion" name="gearbox" value="manual" required><b>Manual</b>
+	<input type="radio" class="radion" name="gearbox" value="automatic"  ><b>Automatic</b>
+	<input type="radio" class="radion" name="gearbox" value="not-declared" ><b>Not declared</b></td>
+	</tr>
+	
+	<tr>
+    <td><label for="dam"><b>Your car is damaged or repaired</b></label></td>
+    <td style = "vertical-align:middle"><input type="radio" class="radion" name="dam" value="Yes" required><b>Yes</b>
+	<input type="radio" class="radion" name="dam" value="No"  ><b>No</b>
+	<input type="radio" class="radion" name="dam" value="not-declared" ><b>Not declared</b></td>
+	</tr>
+	
+	<tr>
+	<td>
+	<label for="modeltype" ><b>Model Type</b></label>
+	</td>
+	<td>
+	<select name="modeltype" required>
+	
+		<option value =	"100"	>	100	</option>
+		<option value =	"145"	>	145	</option>
+		<option value =	"147"	>	147	</option>
+		<option value =	"156"	>	156	</option>
+		<option value =	"159"	>	159	</option>
+		<option value =	"1_reihe"	>	1_reihe	</option>
+		<option value =	"1er"	>	1er	</option>
+		<option value =	"200"	>	200	</option>
+		<option value =	"2_reihe"	>	2_reihe	</option>
+		<option value =	"300c"	>	300c	</option>
+		<option value =	"3_reihe"	>	3_reihe	</option>
+		<option value =	"3er"	>	3er	</option>
+		<option value =	"4_reihe"	>	4_reihe	</option>
+		<option value =	"500"	>	500	</option>
+		<option value =	"5_reihe"	>	5_reihe	</option>
+		<option value =	"5er"	>	5er	</option>
+		<option value =	"601"	>	601	</option>
+		<option value =	"6_reihe"	>	6_reihe	</option>
+		<option value =	"6er"	>	6er	</option>
+		<option value =	"7er"	>	7er	</option>
+		<option value =	"80"	>	80	</option>
+		<option value =	"850"	>	850	</option>
+		<option value =	"90"	>	90	</option>
+		<option value =	"900"	>	900	</option>
+		<option value =	"9000"	>	9000	</option>
+		<option value =	"911"	>	911	</option>
+		<option value =	"a1"	>	a1	</option>
+		<option value =	"a2"	>	a2	</option>
+		<option value =	"a3"	>	a3	</option>
+		<option value =	"a4"	>	a4	</option>
+		<option value =	"a5"	>	a5	</option>
+		<option value =	"a6"	>	a6	</option>
+		<option value =	"a8"	>	a8	</option>
+		<option value =	"a_klasse"	>	a_klasse	</option>
+		<option value =	"accord"	>	accord	</option>
+		<option value =	"agila"	>	agila	</option>
+		<option value =	"alhambra"	>	alhambra	</option>
+		<option value =	"almera"	>	almera	</option>
+		<option value =	"altea"	>	altea	</option>
+		<option value =	"amarok"	>	amarok	</option>
+		<option value =	"andere"	>	andere	</option>
+		<option value =	"antara"	>	antara	</option>
+		<option value =	"arosa"	>	arosa	</option>
+		<option value =	"astra"	>	astra	</option>
+		<option value =	"auris"	>	auris	</option>
+		<option value =	"avensis"	>	avensis	</option>
+		<option value =	"aveo"	>	aveo	</option>
+		<option value =	"aygo"	>	aygo	</option>
+		<option value =	"b_klasse"	>	b_klasse	</option>
+		<option value =	"b_max"	>	b_max	</option>
+		<option value =	"beetle"	>	beetle	</option>
+		<option value =	"berlingo"	>	berlingo	</option>
+		<option value =	"bora"	>	bora	</option>
+		<option value =	"boxster"	>	boxster	</option>
+		<option value =	"bravo"	>	bravo	</option>
+		<option value =	"c1"	>	c1	</option>
+		<option value =	"c2"	>	c2	</option>
+		<option value =	"c3"	>	c3	</option>
+		<option value =	"c4"	>	c4	</option>
+		<option value =	"c5"	>	c5	</option>
+		<option value =	"c_klasse"	>	c_klasse	</option>
+		<option value =	"c_max"	>	c_max	</option>
+		<option value =	"c_reihe"	>	c_reihe	</option>
+		<option value =	"caddy"	>	caddy	</option>
+		<option value =	"calibra"	>	calibra	</option>
+		<option value =	"captiva"	>	captiva	</option>
+		<option value =	"carisma"	>	carisma	</option>
+		<option value =	"carnival"	>	carnival	</option>
+		<option value =	"cayenne"	>	cayenne	</option>
+		<option value =	"cc"	>	cc	</option>
+		<option value =	"ceed"	>	ceed	</option>
+		<option value =	"charade"	>	charade	</option>
+		<option value =	"cherokee"	>	cherokee	</option>
+		<option value =	"citigo"	>	citigo	</option>
+		<option value =	"civic"	>	civic	</option>
+		<option value =	"cl"	>	cl	</option>
+		<option value =	"clio"	>	clio	</option>
+		<option value =	"clk"	>	clk	</option>
+		<option value =	"clubman"	>	clubman	</option>
+		<option value =	"colt"	>	colt	</option>
+		<option value =	"combo"	>	combo	</option>
+		<option value =	"cooper"	>	cooper	</option>
+		<option value =	"cordoba"	>	cordoba	</option>
+		<option value =	"corolla"	>	corolla	</option>
+		<option value =	"corsa"	>	corsa	</option>
+		<option value =	"cr_reihe"	>	cr_reihe	</option>
+		<option value =	"croma"	>	croma	</option>
+		<option value =	"crossfire"	>	crossfire	</option>
+		<option value =	"cuore"	>	cuore	</option>
+		<option value =	"cx_reihe"	>	cx_reihe	</option>
+		<option value =	"defender"	>	defender	</option>
+		<option value =	"delta"	>	delta	</option>
+		<option value =	"discovery"	>	discovery	</option>
+		<option value =	"discovery_sport"	>	discovery_sport	</option>
+		<option value =	"doblo"	>	doblo	</option>
+		<option value =	"ducato"	>	ducato	</option>
+		<option value =	"duster"	>	duster	</option>
+		<option value =	"e_klasse"	>	e_klasse	</option>
+		<option value =	"elefantino"	>	elefantino	</option>
+		<option value =	"eos"	>	eos	</option>
+		<option value =	"escort"	>	escort	</option>
+		<option value =	"espace"	>	espace	</option>
+		<option value =	"exeo"	>	exeo	</option>
+		<option value =	"fabia"	>	fabia	</option>
+		<option value =	"fiesta"	>	fiesta	</option>
+		<option value =	"focus"	>	focus	</option>
+		<option value =	"forester"	>	forester	</option>
+		<option value =	"forfour"	>	forfour	</option>
+		<option value =	"fortwo"	>	fortwo	</option>
+		<option value =	"fox"	>	fox	</option>
+		<option value =	"freelander"	>	freelander	</option>
+		<option value =	"fusion"	>	fusion	</option>
+		<option value =	"g_klasse"	>	g_klasse	</option>
+		<option value =	"galant"	>	galant	</option>
+		<option value =	"galaxy"	>	galaxy	</option>
+		<option value =	"getz"	>	getz	</option>
+		<option value =	"gl"	>	gl	</option>
+		<option value =	"glk"	>	glk	</option>
+		<option value =	"golf"	>	golf	</option>
+		<option value =	"grand"	>	grand	</option>
+		<option value =	"i3"	>	i3	</option>
+		<option value =	"i_reihe"	>	i_reihe	</option>
+		<option value =	"ibiza"	>	ibiza	</option>
+		<option value =	"impreza"	>	impreza	</option>
+		<option value =	"insignia"	>	insignia	</option>
+		<option value =	"jazz"	>	jazz	</option>
+		<option value =	"jetta"	>	jetta	</option>
+		<option value =	"jimny"	>	jimny	</option>
+		<option value =	"juke"	>	juke	</option>
+		<option value =	"justy"	>	justy	</option>
+		<option value =	"ka"	>	ka	</option>
+		<option value =	"kadett"	>	kadett	</option>
+		<option value =	"kaefer"	>	kaefer	</option>
+		<option value =	"kalina"	>	kalina	</option>
+		<option value =	"kalos"	>	kalos	</option>
+		<option value =	"kangoo"	>	kangoo	</option>
+		<option value =	"kappa"	>	kappa	</option>
+		<option value =	"kuga"	>	kuga	</option>
+		<option value =	"laguna"	>	laguna	</option>
+		<option value =	"lancer"	>	lancer	</option>
+		<option value =	"lanos"	>	lanos	</option>
+		<option value =	"legacy"	>	legacy	</option>
+		<option value =	"leon"	>	leon	</option>
+		<option value =	"lodgy"	>	lodgy	</option>
+		<option value =	"logan"	>	logan	</option>
+		<option value =	"lupo"	>	lupo	</option>
+		<option value =	"lybra"	>	lybra	</option>
+		<option value =	"m_klasse"	>	m_klasse	</option>
+		<option value =	"m_reihe"	>	m_reihe	</option>
+		<option value =	"materia"	>	materia	</option>
+		<option value =	"matiz"	>	matiz	</option>
+		<option value =	"megane"	>	megane	</option>
+		<option value =	"meriva"	>	meriva	</option>
+		<option value =	"micra"	>	micra	</option>
+		<option value =	"mii"	>	mii	</option>
+		<option value =	"modus"	>	modus	</option>
+		<option value =	"mondeo"	>	mondeo	</option>
+		<option value =	"move"	>	move	</option>
+		<option value =	"musa"	>	musa	</option>
+		<option value =	"mustang"	>	mustang	</option>
+		<option value =	"mx_reihe"	>	mx_reihe	</option>
+		<option value =	"navara"	>	navara	</option>
+		<option value =	"niva"	>	niva	</option>
+		<option value =	"not-declared"	>	not-declared	</option>
+		<option value =	"note"	>	note	</option>
+		<option value =	"nubira"	>	nubira	</option>
+		<option value =	"octavia"	>	octavia	</option>
+		<option value =	"omega"	>	omega	</option>
+		<option value =	"one"	>	one	</option>
+		<option value =	"outlander"	>	outlander	</option>
+		<option value =	"pajero"	>	pajero	</option>
+		<option value =	"panda"	>	panda	</option>
+		<option value =	"passat"	>	passat	</option>
+		<option value =	"phaeton"	>	phaeton	</option>
+		<option value =	"picanto"	>	picanto	</option>
+		<option value =	"polo"	>	polo	</option>
+		<option value =	"primera"	>	primera	</option>
+		<option value =	"ptcruiser"	>	ptcruiser	</option>
+		<option value =	"punto"	>	punto	</option>
+		<option value =	"q3"	>	q3	</option>
+		<option value =	"q5"	>	q5	</option>
+		<option value =	"q7"	>	q7	</option>
+		<option value =	"qashqai"	>	qashqai	</option>
+		<option value =	"r19"	>	r19	</option>
+		<option value =	"range_rover"	>	range_rover	</option>
+		<option value =	"range_rover_evoque"	>	range_rover_evoque	</option>
+		<option value =	"range_rover_sport"	>	range_rover_sport	</option>
+		<option value =	"rangerover"	>	rangerover	</option>
+		<option value =	"rav"	>	rav	</option>
+		<option value =	"rio"	>	rio	</option>
+		<option value =	"roadster"	>	roadster	</option>
+		<option value =	"roomster"	>	roomster	</option>
+		<option value =	"rx_reihe"	>	rx_reihe	</option>
+		<option value =	"s60"	>	s60	</option>
+		<option value =	"s_klasse"	>	s_klasse	</option>
+		<option value =	"s_max"	>	s_max	</option>
+		<option value =	"s_type"	>	s_type	</option>
+		<option value =	"samara"	>	samara	</option>
+		<option value =	"sandero"	>	sandero	</option>
+		<option value =	"santa"	>	santa	</option>
+		<option value =	"scenic"	>	scenic	</option>
+		<option value =	"scirocco"	>	scirocco	</option>
+		<option value =	"seicento"	>	seicento	</option>
+		<option value =	"serie_2"	>	serie_2	</option>
+		<option value =	"serie_3"	>	serie_3	</option>
+		<option value =	"sharan"	>	sharan	</option>
+		<option value =	"signum"	>	signum	</option>
+		<option value =	"sirion"	>	sirion	</option>
+		<option value =	"sl"	>	sl	</option>
+		<option value =	"slk"	>	slk	</option>
+		<option value =	"sorento"	>	sorento	</option>
+		<option value =	"spark"	>	spark	</option>
+		<option value =	"spider"	>	spider	</option>
+		<option value =	"sportage"	>	sportage	</option>
+		<option value =	"sprinter"	>	sprinter	</option>
+		<option value =	"stilo"	>	stilo	</option>
+		<option value =	"superb"	>	superb	</option>
+		<option value =	"swift"	>	swift	</option>
+		<option value =	"terios"	>	terios	</option>
+		<option value =	"tigra"	>	tigra	</option>
+		<option value =	"tiguan"	>	tiguan	</option>
+		<option value =	"toledo"	>	toledo	</option>
+		<option value =	"touareg"	>	touareg	</option>
+		<option value =	"touran"	>	touran	</option>
+		<option value =	"transit"	>	transit	</option>
+		<option value =	"transporter"	>	transporter	</option>
+		<option value =	"tt"	>	tt	</option>
+		<option value =	"tucson"	>	tucson	</option>
+		<option value =	"twingo"	>	twingo	</option>
+		<option value =	"up"	>	up	</option>
+		<option value =	"v40"	>	v40	</option>
+		<option value =	"v50"	>	v50	</option>
+		<option value =	"v60"	>	v60	</option>
+		<option value =	"v70"	>	v70	</option>
+		<option value =	"v_klasse"	>	v_klasse	</option>
+		<option value =	"vectra"	>	vectra	</option>
+		<option value =	"verso"	>	verso	</option>
+		<option value =	"viano"	>	viano	</option>
+		<option value =	"vito"	>	vito	</option>
+		<option value =	"vivaro"	>	vivaro	</option>
+		<option value =	"voyager"	>	voyager	</option>
+		<option value =	"wrangler"	>	wrangler	</option>
+		<option value =	"x_reihe"	>	x_reihe	</option>
+		<option value =	"x_trail"	>	x_trail	</option>
+		<option value =	"x_type"	>	x_type	</option>
+		<option value =	"xc_reihe"	>	xc_reihe	</option>
+		<option value =	"yaris"	>	yaris	</option>
+		<option value =	"yeti"	>	yeti	</option>
+		<option value =	"ypsilon"	>	ypsilon	</option>
+		<option value =	"z_reihe"	>	z_reihe	</option>
+		<option value =	"zafira"	>	zafira	</option>
+
+	
+	</select>
+	</td>
+	</tr>
+	
+	<tr>
+	<td><label for="brand" ><b>Brand of the car</b></label>
+	</td>
+	<td>
+	<select  name="brand" required>
+	
+		<option value =	"alfa_romeo"	>	alfa_romeo	</option>
+		<option value =	"audi"	>	audi	</option>
+		<option value =	"bmw"	>	bmw	</option>
+		<option value =	"chevrolet"	>	chevrolet	</option>
+		<option value =	"chrysler"	>	chrysler	</option>
+		<option value =	"citroen"	>	citroen	</option>
+		<option value =	"dacia"	>	dacia	</option>
+		<option value =	"daewoo"	>	daewoo	</option>
+		<option value =	"daihatsu"	>	daihatsu	</option>
+		<option value =	"fiat"	>	fiat	</option>
+		<option value =	"ford"	>	ford	</option>
+		<option value =	"honda"	>	honda	</option>
+		<option value =	"hyundai"	>	hyundai	</option>
+		<option value =	"jaguar"	>	jaguar	</option>
+		<option value =	"jeep"	>	jeep	</option>
+		<option value =	"kia"	>	kia	</option>
+		<option value =	"lada"	>	lada	</option>
+		<option value =	"lancia"	>	lancia	</option>
+		<option value =	"land_rover"	>	land_rover	</option>
+		<option value =	"mazda"	>	mazda	</option>
+		<option value =	"mercedes_benz"	>	mercedes_benz	</option>
+		<option value =	"mini"	>	mini	</option>
+		<option value =	"mitsubishi"	>	mitsubishi	</option>
+		<option value =	"nissan"	>	nissan	</option>
+		<option value =	"opel"	>	opel	</option>
+		<option value =	"peugeot"	>	peugeot	</option>
+		<option value =	"porsche"	>	porsche	</option>
+		<option value =	"renault"	>	renault	</option>
+		<option value =	"rover"	>	rover	</option>
+		<option value =	"saab"	>	saab	</option>
+		<option value =	"seat"	>	seat	</option>
+		<option value =	"skoda"	>	skoda	</option>
+		<option value =	"smart"	>	smart	</option>
+		<option value =	"sonstige_autos"	>	sonstige_autos	</option>
+		<option value =	"subaru"	>	subaru	</option>
+		<option value =	"suzuki"	>	suzuki	</option>
+		<option value =	"toyota"	>	toyota	</option>
+		<option value =	"trabant"	>	trabant	</option>
+		<option value =	"volkswagen"	>	volkswagen	</option>
+		<option value =	"volvo"	>	volvo	</option>
+
+	
+	</select>
+	</td>
+	</tr>
+	
+	<tr>
+	<td><label for="fuel" ><b>Fuel type of the car</b></label>
+	</td>
+	<td>
+	<select name="fuel" required>
+		<option value =	"cng"	>	cng	</option>
+		<option value =	"diesel"	>	diesel	</option>
+		<option value =	"electric"	>	electric	</option>
+		<option value =	"hybrid"	>	hybrid	</option>
+		<option value =	"lpg"	>	lpg	</option>
+		<option value =	"not-declared"	>	not-declared	</option>
+		<option value =	"others"	>	others	</option>
+		<option value =	"petrol"	>	petrol	</option>
+
+	</select>
+	</td>
+	</tr>
+	
+	<tr>
+	<td><label for="vehicletype" ><b>Vehicle type</b></label>
+	</td>
+	<td>
+	<select name="vehicletype" required>
+		<option value=	"bus"	>	bus	</option>
+		<option value=	"combination"	>	combination	</option>
+		<option value=	"convertible"	>	convertible	</option>
+		<option value=	"coupe"	>	coupe	</option>
+		<option value=	"limousine"	>	limousine	</option>
+		<option value=	"not-declared"	>	not-declared	</option>
+		<option value=	"others"	>	others	</option>
+		<option value=	"small"	>	small	</option>
+		<option value=	"car"	>	car	</option>
+		<option value=	"suv"	>	suv	</option>
+
+
+
+
+
+	</select>
+	</td>
+	</tr>
+	
+	<tr>
+	<td colspan="2" align="center" ><button class="mybutton" type="submit" name="predict" align='center' value="Predict">Predict</button></td>
+	</tr>
+	</table>
+	</form>
+	<table align="center">
+	<tr>
+		<td style="font-size:23px" colspan="2"><b>{{ypred}}</b></td>
+	</tr>
+
+	</table>
+		<br>
+		<br>
+			
+		
+		
+		
+		</div>
+	</body>
+</html>
