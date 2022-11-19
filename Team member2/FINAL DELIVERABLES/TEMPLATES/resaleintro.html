@@ -1,0 +1,83 @@
+<html>
+	<head>
+	<title>Resale Value Prediction</title>
+	<style>
+		.header {	
+			top:0px;	
+			margin:0px;
+			left: 0px;
+			right: 0px;
+			position: fixed;
+			background: #304040;
+			color: white;
+			overflow: hidden;
+			padding-bottom: 30px;
+			font-size: 2.25vw;
+			width: 100%;
+			padding-left:0px;
+			text-align: center;
+			padding-top:20px;
+		}
+		.second{
+			top:80px;
+			bottom:0px;
+			margin:0px;
+			left: 0px;
+			right: 0%;
+			position: fixed;
+			padding: 0px;
+			width: 100%;
+			
+			background-image:url({{url_for('static',filename='images/intro.gif')}});
+			background-repeat:no-repeat;
+			background-size: contain;
+			
+		}
+		.inside{
+			top:80px;
+			bottom:0px;
+			margin:0px;
+			left: 58.5%;
+			right: 0%;
+			position: fixed;
+			padding-left: 40px;
+			padding-top:8%;
+			padding-right:40px;
+			background-color:#E4EEFF;
+			font-family:Georgia, serif;
+			color:black;
+			font-size:20px;
+			text-align:justify;
+			
+		}
+		.myButton{
+			  border: none;
+			  text-align: center;
+			  cursor: pointer;
+			  text-transform: uppercase;
+			  outline: none;
+			  overflow: hidden;
+			  color: #fff;
+			  font-weight: 700;
+			  font-size: 12px;
+			  background-color: #309090;
+			  padding: 10px 15px;
+			  margin: 0 auto;
+			  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+		}
+	</style>
+	</head>
+	<body>
+		<div class="header">Get the Accurate Resale Value of your Car!!</div>
+		<div class="second">
+			<div class="inside">With difficult economic conditions, it is likely that sales of reconditioned second-hand cars will increase. In most of the countries, it is common to lease a car rather than buying it outright. A lease is a binding contract between a buyer and a seller in which the buyer must pay fixed instalments for a pre-defined number of months/years to the seller/financer. After the lease period is over, the buyer has the possibility to buy the car at its residual value, i.e. its expected resale value. Thus, this application is of commercial interest to seller/financers to be able to predict the residual value of cars with accuracy.
+		<br><br><br>
+		<div style="margin-left:17%">
+		<a href="{{url_for('predict')}}"><button type="button" class="myButton" >Want to know the resale value of your car??</button></a>
+		</div>
+		</div>
+		
+		
+		</div>
+	</body>
+</html>
